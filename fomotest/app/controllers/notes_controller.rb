@@ -5,7 +5,6 @@ class NotesController < ApplicationController
 
   def all
     @notes = Note.all
-
   end
 
   def index
@@ -22,7 +21,6 @@ class NotesController < ApplicationController
   end
 
   def edit
-
   end
 
   def create
@@ -32,21 +30,22 @@ class NotesController < ApplicationController
       @note.user = @auth_user
       binding.pry
       @note.save!
-      redirect_to events_note_path(@event, @note)
+      redirect_to event_notes_path(@event, @note)
     else
       render :new
     end
-
   end
 
   def update
-
-
+    if @note.update_attributes(params[:note])
+      redirect_to events_note_path(@note)
+    else
+      render :edit
+    end
   end
 
   def destroy
     @note.destroy
-
   end
 
   private
