@@ -20,7 +20,7 @@ class NotesController < ApplicationController
 
   def new
     @note = Note.new
-
+    @event = Event.find(params[:event_id])
   end
 
   def edit
