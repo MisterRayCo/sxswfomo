@@ -14,5 +14,7 @@
 
 class Event < ActiveRecord::Base
   attr_accessible :address, :date, :name, :speakers, :url
+  validates :name, :date, :presence => true
+
 	has_many :notes
 end

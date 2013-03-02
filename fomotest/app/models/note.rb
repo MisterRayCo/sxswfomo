@@ -13,6 +13,8 @@
 
 class Note < ActiveRecord::Base
   attr_accessible :description, :name, :event_id
+  validates :name, :description, :presence =>true
+
 	belongs_to :event
 	belongs_to :user
 end

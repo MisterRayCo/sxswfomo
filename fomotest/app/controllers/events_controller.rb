@@ -1,4 +1,6 @@
 class EventsController < ApplicationController
+  before_filter :find_event, :only => [:show, :edit, :destroy, :update]
+
   # GET /events
   # GET /events.json
   def index
@@ -79,5 +81,10 @@ class EventsController < ApplicationController
       format.html { redirect_to events_url }
       format.json { head :no_content }
     end
+  end
+
+  private
+  def find_event
+    @event = Event.find(params[:id]) if params[:id]
   end
 end

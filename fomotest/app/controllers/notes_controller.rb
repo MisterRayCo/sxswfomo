@@ -1,4 +1,6 @@
 class NotesController < ApplicationController
+  before_filter :find_note, :only => [:show, :edit, :destroy, :update]
+
   # GET /notes
   # GET /notes.json
   def index
