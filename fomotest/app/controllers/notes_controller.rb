@@ -1,6 +1,7 @@
 class NotesController < ApplicationController
   before_filter :find_note, :only => [:show, :edit, :destroy, :update]
-  before_filter :user_gate, :only => [:edit, :create, :update, :destroy]
+  before_filter :user_gate, :only => [:edit, :update, :destroy]
+  before_filter :find_event, :except => [:all]
 
   def all
     @notes = Note.all
@@ -8,13 +9,10 @@ class NotesController < ApplicationController
   end
 
   def index
-    @event = Event.find(params[:event_id])
     @notes = Note.where(:event_id => @event.id)
   end
 
   def show
-    @note = Note.find(params[:id])
-
 
   end
 
@@ -24,30 +22,36 @@ class NotesController < ApplicationController
   end
 
   def edit
-    @note = Note.find(params[:id])
+
   end
 
   def create
     @note = Note.new(params[:note])
-
+    if @note.save
+      @note.event = @event
+      @note.user = @auth_user
+      binding.pry
+      @note.save!
+      redirect_to events_note_path(@event, @note)
+    else
+      render :new
+    end
 
   end
 
   def update
-    @note = Note.find(params[:id])
 
 
   end
 
   def destroy
-    @note = Note.find(params[:id])
     @note.destroy
 
   end
 
   private
   def find_note
-    Note.find(params[:note_id])
+    @note = Note.find(params[:id])
   end
 
   def user_gate
@@ -60,4 +64,7 @@ class NotesController < ApplicationController
     end
   end
 
+  def find_event
+    @event = Event.find(params[:event_id]) if params[:event_id]
+  end
 end
