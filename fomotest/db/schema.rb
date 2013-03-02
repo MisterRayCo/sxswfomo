@@ -43,7 +43,7 @@ ActiveRecord::Schema.define(:version => 20130302191129) do
     t.string   "password_digest"
     t.integer  "up_votes",        :default => 0,        :null => false
     t.integer  "down_votes",      :default => 0,        :null => false
-    t.string   "type",            :default => "normal"
+    t.string   "user_type",       :default => "normal"
   end
 
   create_table "votings", :force => true do |t|
