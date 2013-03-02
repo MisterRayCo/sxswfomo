@@ -1,8 +1,7 @@
 class NotesController < ApplicationController
   before_filter :find_note, :only => [:show, :edit, :destroy, :update]
+  before_filter :user_gate, :only => [:edit, :create, :update, :destroy]
 
-  # GET /notes
-  # GET /notes.json
   def all
     @notes = Note.all
 
@@ -13,47 +12,52 @@ class NotesController < ApplicationController
     @notes = Note.where(:event_id => @event.id)
   end
 
-  # GET /notes/1
-  # GET /notes/1.json
   def show
     @note = Note.find(params[:id])
 
 
   end
 
-  # GET /notes/new
-  # GET /notes/new.json
   def new
     @note = Note.new
 
   end
 
-  # GET /notes/1/edit
   def edit
     @note = Note.find(params[:id])
   end
 
-  # POST /notes
-  # POST /notes.json
   def create
     @note = Note.new(params[:note])
 
 
   end
 
-  # PUT /notes/1
-  # PUT /notes/1.json
   def update
     @note = Note.find(params[:id])
 
 
   end
 
-  # DELETE /notes/1
-  # DELETE /notes/1.json
   def destroy
     @note = Note.find(params[:id])
     @note.destroy
 
   end
+
+  private
+  def find_note
+    Note.find(params[:note_id])
+  end
+
+  def user_gate
+    if !@auth_user.nil?
+      if @auth_user.user_type != "admin" && @auth_user != User.find(@note.user_id)
+        redirect_to root_path
+      end
+    else
+      redirect_to login_path
+    end
+  end
+
 end
