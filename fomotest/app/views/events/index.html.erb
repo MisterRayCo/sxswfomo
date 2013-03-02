@@ -1,12 +1,15 @@
 <div class="row">
 	<h2>SXSW Events</h2>
 </div>
-
-
+<br>
+ <%= link_to 'New Event', new_event_path %>
+<br>
 <% @events.each do |event| %>
 	<div class="span3">
 		<h4><%= link_to event.name, event%></h4>
-		<%= event.date %>
+		<%= event.date %><br>
+		<%= link_to 'Notes', event_notes_path(event) %>
+<br>		<%= link_to 'Add a Note', new_event_note_path(event) %>
 	</div>
 <% end %>
 
