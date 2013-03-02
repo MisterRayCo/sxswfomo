@@ -17,4 +17,6 @@ class Event < ActiveRecord::Base
   validates :name, :date, :presence => true
 
 	has_many :notes
+
+  make_voteable
 end

@@ -6,6 +6,7 @@ Fomotest::Application.routes.draw do
     resources :notes
   end
 
+  match '/notes' => 'notes#all', :via => :get
 
   root :to => 'home#index'
 
