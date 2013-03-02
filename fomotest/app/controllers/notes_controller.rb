@@ -30,9 +30,8 @@ class NotesController < ApplicationController
     if @note.save
       @note.event = @event
       @note.user = @auth_user
-      binding.pry
       @note.save!
-      redirect_to events_note_path(@event, @note)
+      redirect_to event_notes_path(@event, @note)
     else
       render :new
     end

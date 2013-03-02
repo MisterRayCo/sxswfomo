@@ -1,3 +1,12 @@
 <h1>All notes</h1>
 
+<% @notes.each do |note| %>
+        <div class="span3">
+                <h4><%= link_to note.name, note_path(note)%></h4>
+                <%= truncate(note.description, :length => 100, :separator => ' ', :omission => '...')  %>
+        </div>
+<% end %>
+
+
+
 <%= render 'event_list' %>
