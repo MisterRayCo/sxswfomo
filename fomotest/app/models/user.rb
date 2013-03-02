@@ -18,5 +18,5 @@ class User < ActiveRecord::Base
 	has_many :notes
 	has_secure_password
 
-  make_voter
+	make_voter
 end
