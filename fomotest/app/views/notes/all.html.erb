@@ -2,7 +2,7 @@
 
 <% @notes.each do |note| %>
         <div class="span3">
-                <h4><%= link_to note.name, events_note_path(note.event, note) %></h4>
+                <h4><%= link_to note.name, event_notes_path(note.event, note) %></h4>
                 <%= truncate(note.description, :length => 100, :separator => ' ', :omission => '...')  %>
         </div>
 <% end %>
