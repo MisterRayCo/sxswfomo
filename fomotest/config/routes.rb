@@ -18,4 +18,7 @@ Fomotest::Application.routes.draw do
 	match '/logout' => 'session#destroy', :via => 'get'
 	match '/findbydate/:date' => 'events#findbydate', :via => 'get', :as => 'findbydate'
 
+  match '/vote_up/:id' => 'notes#vote_up', :via => :post
+  match '/vote_down/:id' => 'notes#vote_down', :via => :post
+
 end
