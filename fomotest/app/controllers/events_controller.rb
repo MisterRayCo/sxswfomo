@@ -45,8 +45,15 @@ class EventsController < ApplicationController
     redirect_to root_path
   end
 
+  def findbydate
+	@events = Event.where(params[:date])
+  end
+
+
   private
   def find_event
     @event = Event.find(params[:id]) if params[:id]
   end
+
+  
 end

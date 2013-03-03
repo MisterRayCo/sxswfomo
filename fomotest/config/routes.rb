@@ -16,5 +16,6 @@ Fomotest::Application.routes.draw do
 	match '/login' => 'session#new', :via => :get
 	match '/login' => 'session#login', :via => :post
 	match '/logout' => 'session#destroy', :via => 'get'
+	match '/findbydate/:date' => 'events#findbydate', :via => 'get', :as => 'findbydate'
 
 end

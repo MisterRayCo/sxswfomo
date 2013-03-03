@@ -1,7 +1,23 @@
 <div class="row">
 	<h2>SXSW Events</h2>
 </div>
+
+<div class="row">
+	<div class="span2">
+		<%= link_to '3/8', findbydate_path('2013, 3, 8') %>
+	</div>
+        <div class="span2">3/9
+	</div>
+        <div class="span2">3/10
+	</div>
+        <div class="span2">3/11
+	</div>
+        <div class="span2">3/12
+	</div> 
+</div>
 <br>
+
+
  <%= link_to 'New Event', new_event_path %>
 <br>
 <% @events.each do |event| %>
