@@ -48,12 +48,19 @@ class NotesController < ApplicationController
   end
 
   def vote_up
-    @event = @note.event
+    if @auth_user.upvote(@note)
+      render :show
+    else
+      render :show
+    end
   end
 
   def vote_down
-    @event = @note.event
-
+    if @auth_user.upvote(@note)
+      render :show
+    else
+      render :show
+    end
   end
 
   private
