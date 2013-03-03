@@ -11,6 +11,12 @@
   <%= @note.description %>
 </p>
 
+<p>
+  <b>Vote for Note</b>
+  <%= button_to '+', :action => :vote_up %>
+  <%= button_to '-', :action => :vote_down %>
+</p>
 
-<%= link_to 'Edit', edit_note_path(@note) %> |
+
+<%= link_to 'Edit', edit_event_note_path(@note) %> |
 <%= link_to 'Back', notes_path %>

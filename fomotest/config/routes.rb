@@ -17,4 +17,7 @@ Fomotest::Application.routes.draw do
 	match '/login' => 'session#login', :via => :post
 	match '/logout' => 'session#destroy', :via => 'get'
 
+  match '/vote_up/:id' => 'notes#vote_up', :via => :post
+  match '/vote_down/:id' => 'notes#vote_down', :via => :post
+
 end

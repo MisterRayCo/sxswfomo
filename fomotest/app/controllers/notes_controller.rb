@@ -1,5 +1,5 @@
 class NotesController < ApplicationController
-  before_filter :find_note, :only => [:show, :edit, :destroy, :update]
+  before_filter :find_note, :only => [:show, :edit, :destroy, :update, :vote_up, :vote_down]
   before_filter :user_gate, :only => [:edit, :update, :destroy]
   before_filter :find_event, :except => [:all]
 
@@ -45,6 +45,15 @@ class NotesController < ApplicationController
 
   def destroy
     @note.destroy
+  end
+
+  def vote_up
+    @event = @note.event
+  end
+
+  def vote_down
+    @event = @note.event
+
   end
 
   private
