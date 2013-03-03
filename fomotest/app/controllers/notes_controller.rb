@@ -48,19 +48,23 @@ class NotesController < ApplicationController
   end
 
   def vote_up
-    if @auth_user.upvote(@note)
-      render :show
-    else
-      render :show
+    if !@auth_user
+      flash[:errors] = "You must be logged in to do that."
+    elsif @auth_user.up_vote(@note)
+      flash[:errors] = "You are unable to vote for that."
     end
+
+    render :show
   end
 
   def vote_down
-    if @auth_user.upvote(@note)
-      render :show
-    else
-      render :show
+    if !@auth_user
+      flash[:errors] = "You must be logged in to do that."
+    elsif @auth_user.down_vote(@note)
+      flash[:errors] = "You are unable to vote for that."
     end
+
+    render :show
   end
 
   private
