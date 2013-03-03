@@ -51,6 +51,8 @@ class NotesController < ApplicationController
     if !@auth_user
       flash[:errors] = "You must be logged in to do that."
     elsif @auth_user.up_vote(@note)
+      redirect_to event_note_path(@note)
+    else
       flash[:errors] = "You are unable to vote for that."
     end
 
@@ -61,6 +63,8 @@ class NotesController < ApplicationController
     if !@auth_user
       flash[:errors] = "You must be logged in to do that."
     elsif @auth_user.down_vote(@note)
+      redirect_to event_note_path(@note)
+    else
       flash[:errors] = "You are unable to vote for that."
     end
 
