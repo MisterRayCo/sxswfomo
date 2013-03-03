@@ -28,7 +28,8 @@
 
 
 		        <div class="row span12">
-<%= yield %>            	
+          <span><%= flash[:errors] if flash %></span>
+<%= yield %>
 		<div class="span3">
 				</div>
             			<div class="span9">
