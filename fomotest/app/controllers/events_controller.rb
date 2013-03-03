@@ -2,7 +2,9 @@ class EventsController < ApplicationController
   before_filter :find_event, :only => [:show, :edit, :destroy, :update]
 
   def index
-    @events = Event.all
+    @events = Event.all(:select => "#{Event.table_name}.*, COUNT(#{Note.table_name}.id) number_of_notes",
+                        :joins => :notes,
+                        :order => "number_of_notes")
 
     @event_count = @events.length
   end
@@ -44,7 +46,9 @@ class EventsController < ApplicationController
   end
 
   def findbydate
-	@events = Event.where(params[:date])
+	 requested_date= params[:date].split(",")
+	 requested_date = requested_date.map{|d| d.to_i}
+	@events = Event.where(:date => Date.new(requested_date[0], requested_date[1], requested_date[2]))
   end
 
 
