@@ -3,17 +3,14 @@ class EventsController < ApplicationController
 
   def index
     @events = Event.all
-
   end
 
   def show
     @event = Event.find(params[:id])
-
   end
 
   def new
     @event = Event.new
-
   end
 
   def edit
@@ -22,17 +19,26 @@ class EventsController < ApplicationController
 
   def create
     @event = Event.new(params[:event])
+    if @event.save
+      redirect_to event_path(@event)
+    else
+      render :new
+    end
   end
 
   def update
     @event = Event.find(params[:id])
-
+    if @event.update_attributes(params[:event])
+      redirect_to event_path(@event)
+    else
+      render :edit
+    end
   end
 
   def destroy
     @event = Event.find(params[:id])
-    @event.destroy
-
+    @event.delete
+    redirect_to root_path
   end
 
   private
