@@ -2,7 +2,9 @@ class EventsController < ApplicationController
   before_filter :find_event, :only => [:show, :edit, :destroy, :update]
 
   def index
-    @events = Event.all
+    @events = Event.all(:select => "#{Event.table_name}.*, COUNT(#{Note.table_name}.id) number_of_notes",
+                        :joins => :notes,
+                        :order => "number_of_notes")
   end
 
   def show
