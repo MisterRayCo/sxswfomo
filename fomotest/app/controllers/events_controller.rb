@@ -5,6 +5,8 @@ class EventsController < ApplicationController
     @events = Event.all(:select => "#{Event.table_name}.*, COUNT(#{Note.table_name}.id) number_of_notes",
                         :joins => :notes,
                         :order => "number_of_notes")
+
+    @event_count = @events.length
   end
 
   def show
